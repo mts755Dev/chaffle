@@ -1,0 +1,48 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  directUrl  = env("DIRECT_URL")
+  extensions = [hstore(schema: "extensions"), uuid_ossp(map: "uuid-ossp")]
+}
+
+model ticket {
+  id              String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  isFree          Boolean        @default(false)
+  buyerName       String
+  buyerEmail      String
+  phone           String?
+  address         String?
+  isWinner        Boolean        @default(false)
+  amount          Int
+  quantity        Int
+  stripeSession   Json?
+  ip              String
+  donation_form   donation_form? @relation(fields: [donation_formId], references: [id])
+  donation_formId String?        @db.Uuid
+  paid            Boolean        @default(false)
+  created_at      DateTime       @default(now()) @db.Timestamptz(6)
+  updated_at      DateTime       @default(now()) @db.Timestamptz(6)
+}
+
+model donation_form {
+  id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                       String?
+  mission_statement           String?
+  charity_info                String?
+  donation_amount_information String?
+  rules                       String?
+  backgroundImage             String?
+  images                      String[]
+  created_at                  DateTime @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime @default(now()) @db.Timestamptz(6)
+  stripeAccount               Json?
+  draw_date                   String?
+  min_ticket_price            Int?     @default(5)
+  raffleLocation              String?
+  tickets                     ticket[]
+}

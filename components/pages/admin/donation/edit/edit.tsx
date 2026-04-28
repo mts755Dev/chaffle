@@ -59,6 +59,7 @@ export const DonationEdit = ({ donationData }: Props) => {
           rules: donationData?.rules ?? '',
           drawDate: donationData?.draw_date ?? '',
           raffleLocation: donationData?.raffleLocation ?? '',
+          autoCheckDonation: donationData?.autoCheckDonation ?? false,
         }}
       />
 

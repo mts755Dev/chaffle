@@ -49,11 +49,12 @@ type Props = {
     rules: string;
     drawDate: string;
     raffleLocation: string;
+    autoCheckDonation: boolean;
   };
 };
 
 export const DonationEditForm = ({
-  formData: { charityInfo, rules, title, id, drawDate, raffleLocation },
+  formData: { charityInfo, rules, title, id, drawDate, raffleLocation, autoCheckDonation },
 }: Props) => {
   const [usStates, setUsStates] = useState<States[]>([]);
 
@@ -95,6 +96,7 @@ export const DonationEditForm = ({
         }),
 
       locationState: z.string(),
+      autoCheckDonation: z.boolean(),
     })
     .required();
 
@@ -106,6 +108,7 @@ export const DonationEditForm = ({
       rules: rules ?? '',
       drawDate: drawDate ?? '',
       locationState: raffleLocation ?? '',
+      autoCheckDonation: autoCheckDonation ?? false,
     },
   });
 
@@ -117,6 +120,7 @@ export const DonationEditForm = ({
         rules: data.rules,
         draw_date: data.drawDate,
         raffleLocation: data.locationState,
+        autoCheckDonation: data.autoCheckDonation,
         id,
       });
 
@@ -216,6 +220,29 @@ export const DonationEditForm = ({
             )}
           />
         </div>
+
+        <FormField
+          control={form.control}
+          name="autoCheckDonation"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex items-center space-x-3">
+                <FormControl>
+                  <Input
+                    type="checkbox"
+                    className="w-4 h-4"
+                    checked={field.value}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                  />
+                </FormControl>
+                <FormLabel className="cursor-pointer">
+                  Auto-check 10% platform donation by default
+                </FormLabel>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}

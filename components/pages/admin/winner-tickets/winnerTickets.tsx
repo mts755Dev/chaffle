@@ -1,3 +1,5 @@
+'use client';
+
 import DataTable from '@/components/shared/dataTable';
 import { ticket } from '@prisma/client';
 import React from 'react';

@@ -271,7 +271,7 @@ export const Donation = ({
               ) : (
                 <>
                   <span className="text-sm font-semibold text-center">
-                    #{winnerTicket.id}
+                    #{winnerTicket.id.split('-')[0]}
                   </span>
                   <span>Winner Ticket</span>
                 </>
@@ -289,6 +289,7 @@ export const Donation = ({
                 raffleId={donationData.id}
                 disabled={!agreementCheck}
                 iconButton={true}
+                autoCheckDonation={donationData.autoCheckDonation ?? false}
               />
               <>
                 <div className="mt-4 text-sm font-semibold flex justify-center items-center space-x-2">

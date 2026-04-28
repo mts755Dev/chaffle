@@ -16,7 +16,7 @@ export async function GET(
   const emailData = await sendEmail({
     email: data.buyerEmail,
     subject: 'Chaffle Ticket purchase summary',
-    body: getPurchaseEmail(data.quantity, data.id),
+    body: getPurchaseEmail(data.quantity, data.id, data.donation_formId ?? ''),
   });
 
   console.log("Email Data", emailData)

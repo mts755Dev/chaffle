@@ -7,6 +7,11 @@ export const columns: ColumnDef<ticket>[] = [
     header: 'Ticket Id',
   },
   {
+    id: 'referenceId',
+    header: 'Reference Id',
+    accessorFn: (row) => row.id?.split('-')[0] ?? row.id,
+  },
+  {
     accessorKey: 'buyerName',
     header: 'Name',
   },

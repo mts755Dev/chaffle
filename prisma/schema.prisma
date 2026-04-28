@@ -22,15 +22,15 @@ model ticket {
   quantity        Int
   stripeSession   Json?
   ip              String
-  donation_form   donation_form? @relation(fields: [donation_formId], references: [id])
   donation_formId String?        @db.Uuid
   paid            Boolean        @default(false)
   created_at      DateTime       @default(now()) @db.Timestamptz(6)
   updated_at      DateTime       @default(now()) @db.Timestamptz(6)
+  donation_form   donation_form? @relation(fields: [donation_formId], references: [id])
 }
 
 model donation_form {
-  id                          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id                          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title                       String?
   mission_statement           String?
   charity_info                String?
@@ -38,11 +38,23 @@ model donation_form {
   rules                       String?
   backgroundImage             String?
   images                      String[]
-  created_at                  DateTime @default(now()) @db.Timestamptz(6)
-  updated_at                  DateTime @default(now()) @db.Timestamptz(6)
+  created_at                  DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at                  DateTime     @default(now()) @db.Timestamptz(6)
   stripeAccount               Json?
   draw_date                   String?
-  min_ticket_price            Int?     @default(5)
+  min_ticket_price            Int?         @default(5)
   raffleLocation              String?
+  autoCheckDonation           Boolean?     @default(false)
+  secure_link                 secure_link?
   tickets                     ticket[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model secure_link {
+  id            String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  raffleId      String        @unique @db.Uuid
+  expired       Boolean       @default(false)
+  created_at    DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at    DateTime      @default(now()) @db.Timestamptz(6)
+  donation_form donation_form @relation(fields: [raffleId], references: [id])
 }

@@ -19,6 +19,7 @@ export const assets = {
   contactSVG: { url: `${SVG_BASE_URL}/contact1.svg`, alt: `contact` },
   ticketSvg: { url: `${SVG_BASE_URL}/ticket.svg`, alt: `ticket` },
   purchaseSVG: { url: `${SVG_BASE_URL}/purchase.svg`, alt: `purchase` },
+  buyNowPNG: { url: `${PNG_BASE_URL}/buynow.png`, alt: `buy now` },
   brandingSVG: { url: `${SVG_BASE_URL}/branding2.svg`, alt: `branding` },
   donationSVG: { url: `${SVG_BASE_URL}/donation.svg`, alt: `donation` },
   organization1: {

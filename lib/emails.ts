@@ -1,4 +1,4 @@
-export const getPurchaseEmail = (quantity: number, ticketNumber: string) => `
+export const getPurchaseEmail = (quantity: number, ticketNumber: string, raffleId: string) => `
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
@@ -374,9 +374,9 @@ export const getPurchaseEmail = (quantity: number, ticketNumber: string) => `
                                   </style><!
                                 [endif]-->
                                 <div align="left">
-                                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://chaffle.org/" style="height:37px; v-text-anchor:middle; width:142px;" arcsize="11%"  stroke="f" fillcolor="#3AAEE0"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
+                                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://chaffle.org/donation/${raffleId}" style="height:37px; v-text-anchor:middle; width:142px;" arcsize="11%"  stroke="f" fillcolor="#3AAEE0"><w:anchorlock/><center style="color:#FFFFFF;"><![endif]-->
                                   <a
-                                    href="https://chaffle.org/"
+                                    href="https://chaffle.org/donation/${raffleId}"
                                     target="_blank"
                                     class="v-button"
                                     style="
